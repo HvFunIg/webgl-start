@@ -144,6 +144,12 @@ th,td{
     width: 80vw;
     color: #A0A0A0;
 }
+.modal-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .modal-input{
     background-color: #424242;
     padding: 10px 15px;

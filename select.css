@@ -1,4 +1,9 @@
-
+.modal-select--wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
 .modal-select--input{
     display: none;
     margin: 15px;
@@ -27,7 +32,7 @@
 .select:before{
     content: ">";
     display: inline-block;
-    background: white;
+
     position: absolute;
     right: -5px;
     top: 2px;
@@ -36,37 +41,37 @@
     height: 26px;
     text-align: center;
     line-height: 26px;
-    border: 2px solid #ddd;
     transform: rotate(90deg);
     cursor: pointer;
 }
 
 .select input[name="list"]:not(:checked) ~ #text{
-    color: black;
-    background: white;
+
 }
 
-.select input[name="list"]:checked ~ #text
-{
+.select input[name="list"]:checked ~ #text {
     background: transparent;
     color: transparent;
     z-index: 2;
 }
 
-#select:disabled ~ .items #text
-{
-    background: #eee;
+#select:disabled ~ .items #text{
+    background: #424242;
 }
 
-.items
-{
+.items{
     display: block;
+    width: 175px;
     min-height: 30px;
+
     position: absolute;
-    border: 2px solid #ddd;
-    overflow: hidden;
-    width: 160px;
+    margin: 0 15px;
+    border: 1px solid #5F5F5F;
+    border-radius: 6px;
+
     cursor: pointer;
+    overflow: hidden;
+
 }
 
 #select:not(:checked) ~ .items
@@ -76,33 +81,29 @@
 
 .items label
 {
-    border-top: 2px solid #ddd;
     display: none;
-    padding-left: 10px;
-    background: white;
+    padding-left: 15px;
+    background: #424242;
 }
 
-.items label:hover
-{
-    background: #eee;
+.items label:hover{
+    background: #505050;
     cursor: pointer;
 }
 
-#select:checked ~ .items
-{
+#select:checked ~ .items{
+    /*30 - это высота input */
     padding-top: 30px;
 }
 
-#select:checked ~ .items label
-{
+#select:checked ~ .items label{
     display: block;
 }
 
-.items input:checked + label
-{
+.items input:checked + label{
     display: block!important;
     border: none;
-    background: white;
+    background: #424242;
 }
 
 #select:checked ~ .bg
@@ -113,22 +114,5 @@
     bottom: 0;
     right: 0;
     z-index: 0;
-    background: rgba(0,0,0,0.4);
-}
-
-a
-{
-    display: block;
-    width: 160px;
-    text-align: center;
-    padding: 5px 0;
-    color: black;
-    text-decoration: none;
-    border: 2px solid #ddd;
-}
-
-a:hover
-{
-    cursor: pointer;
-    border-color: red;
+    background: rgba(0,0,0,0);
 }

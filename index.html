@@ -9,16 +9,16 @@
 <body>
     <template id="customTemplate">
         <tr>
-            <td class="td-icon">
+            <td class="td-icon" name="rowColor">
                 <svg width="41" height="41">
                 <rect x="0" y="0" width="41" height="41" fill="#86EAE9"/>
                 </svg>
             </td>
             <td>
-                <input type="text" name="name" value="Мятное утро"/>
+                <input type="text" name="rowName" value="Мятное утро"/>
             </td>
-            <td> <input type="text" name="type" value="base"/></td>
-            <td> <input type="color" name="color" value="#86EAE9"/></td>
+            <td> <input type="text" name="rowType" value="base"/></td>
+            <td> <input type="text" name="rowColor" value="#86EAE9"/></td>
             <td class="td-icon">
                 <svg class="button-edit--base button-edit--pencil" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12.8701 3.60447C13.0429 3.41283 13.2481 3.26081 13.4739 3.1571C13.6997 3.05338 13.9417 3 14.1861 3C14.4306 3 14.6726 3.05338 14.8984 3.1571C15.1242 3.26081 15.3293 3.41283 15.5022 3.60447C15.675 3.79611 15.8121 4.02362 15.9056 4.27401C15.9991 4.5244 16.0473 4.79277 16.0473 5.06379C16.0473 5.33481 15.9991 5.60317 15.9056 5.85356C15.8121 6.10395 15.675 6.33146 15.5022 6.5231L6.61905 16.3735L3 17.468L3.98701 13.4549L12.8701 3.60447Z" stroke-linecap="round" stroke-linejoin="round"/>
@@ -35,45 +35,39 @@
 
     <section id="modal" class="modal">
         <h2>Добавление цвета</h2>
-            <div>
-                <label for="modalName"> Название цвета</label>
+        <form id="modalForm" class="modal-form">
+                <label for="modalName"> Название цвета
                 <input class="modal-input"
                        name="name"
                        id = "modalName"
                        type="text"
                        placeholder="Введите название"
+                       required
                 >
-            </div>
-            <div>
-                <label for="modalType"> Выберите тип</label>
-                <select name="type" id="modalType" class="modal-select">
-                    <option value="main" selected> Main</option>
-                    <option value="primary"> Primary</option>
-                    <option value="secondary"> Secondary</option>
-                    <option value="base"> Base</option>
-                </select>
+                </label>
 
-            </div>
-            <div>
+            <div class="modal-select--wrapper">
+                <p>Выберите тип</p>
                 <label for="select" class="select">
                     <input class="modal-select--input" type="radio" name="list" value="not_changed" id="bg" checked />
                     <input class="modal-select--input" type="radio" name="list" value="not_changed" id="select">
                     <label class="bg" for="bg"></label>
                     <div class="items">
-                        <input class="modal-select--input" type="radio" name="list" value="first_value" id="list[0]">
-                        <label for="list[0]">First option</label>
-                        <input class="modal-select--input" type="radio" name="list" value="second_value" id="list[1]">
-                        <label for="list[1]">Second loooooong option</label>
+                        <input class="modal-select--input" type="radio" name="list" value="main" id="list[0]" checked>
+                        <label for="list[0]">Main</label>
+                        <input class="modal-select--input" type="radio" name="list" value="primary" id="list[1]">
+                        <label for="list[1]">Primary</label>
+                        <input class="modal-select--input" type="radio" name="list" value="secondary" id="list[2]">
+                        <label for="list[2]">Secondary</label>
+                        <input class="modal-select--input" type="radio" name="list" value="base" id="list[3]">
+                        <label for="list[3]">Base</label>
                         <span id="text">Select something...</span>
                     </div>
                 </label>
             </div>
-            <div>
                 <input type="color" class="modal-input--color">
-            </div>
-
-        <button class="form-element button-add button-add--active"
-                onclick="insertRow()"> Добавить </button>
+        <input type="submit" class="form-element button-add button-add--active" value="Добавить">
+        </form>
     </section>
 
 
@@ -105,7 +99,7 @@
                 </tr>
                 </thead>
                 <tbody id="tableBody">
-                <custom-tr></custom-tr>
+                <custom-tr name="Мята" type="Main" color="#111111"  ></custom-tr>
                 </tbody>
             </table>
         </div>
