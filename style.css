@@ -1,0 +1,186 @@
+@import url("https://use.typekit.net/trf2kch.css");
+*{
+    font-family: 'Lato', sans-serif;
+    transition: all 0.2s linear;
+    font-size: 12px;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #313131;
+    border-radius: 20px;
+}
+h2 {
+    color: white;
+
+}
+input{
+    font-weight: 400;
+}
+.table-wrapper{
+    width: 100%;
+    overflow-x: auto;
+}
+table{
+    width: 100%;
+}
+tr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4.5em;
+}
+th{
+    height: 100%;
+    padding: 0;
+    color: white;
+}
+th:first-child,td:first-child{
+    flex: 0.5;
+}
+th:nth-child(2),td:nth-child(2){
+    flex: 1.6;
+}
+td{
+    font-size: 0.91rem;
+    font-weight: 400;
+    color: #BFBFBF;
+    height: 100%;
+}
+.td-icon{
+    justify-content: center;
+}
+th,h2{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+th,td{
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 4.5rem;
+
+    background-color: #424242;
+    border: 1px solid #333333;
+    padding: 0 0.8rem;
+}
+
+
+.colorSection{
+    width: 80vw;
+    max-width: 800px;
+
+}
+.section-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+.section-header--buttons {
+    position: absolute;
+    right: 0;
+    cursor: default;
+}
+.button-edit--base{
+    fill: #8D8D8D;
+    cursor: pointer;
+}
+.button-edit--save:hover {
+    fill: #49f54b;
+}
+.button-edit--close:hover,
+.button-edit--bin:hover {
+    fill: #CA4C4C;
+}
+.button-edit--pencil{
+    fill: none;
+    stroke: #8D8D8D;
+}
+.button-edit--pencil:hover{
+    fill: none;
+    stroke: #53CBF1;
+}
+
+.button-add{
+    max-width: 80%;
+    width: 220px;
+    height: 35px;
+
+    margin: 32px 0;
+    border-radius: 100px;
+
+    color: white;
+    border: 1px solid #53CBF1;
+    cursor: pointer;
+}
+.button-add:hover{
+    border: 1px solid white;
+}
+
+.button-add--inactive{
+    background: transparent;
+}
+.button-add--active{
+    background: #53CBF1;
+}
+
+
+.form-element{
+    font-weight: 700;
+}
+
+.modal{
+    max-width: 320px;
+    width: 80vw;
+    color: #A0A0A0;
+}
+.modal-input{
+    background-color: #424242;
+    padding: 10px 15px;
+    margin: 15px;
+
+    border-radius: 6px;
+    border: 1px solid #5F5F5F;
+    outline: none;
+}
+.modal-input::placeholder{
+    color: #BFBFBF;
+}
+.modal-input:hover{
+    background-color: #505050;
+}
+.modal-input--color{
+    border-radius: 4px;
+    border: none;
+}
+
+
+
+@media screen and (max-width: 1024px) {
+
+        th,h2{
+        font-size: 1.2rem;
+    }
+        th,td{
+        padding: 0 0.5rem;
+    }
+
+    }
+@media screen and (max-width: 600px) {
+   .colorSection{
+       align-items: flex-start;
+   }
+    .button-add{
+        align-self: center;
+    }
+}
