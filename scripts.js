@@ -6,15 +6,16 @@ class CustomTr extends HTMLElement {
     connectedCallback() {
         let table = document.querySelector('#tableBody');
         let template = document.querySelector('#customTemplate')
-
         let clone = template.content.cloneNode(true);
         let td = clone.querySelectorAll("td");
 
-        let name=this.getAttribute('name');
-        let type=this.getAttribute('type');
-        let color=this.getAttribute('color');
-        td[1].textContent = name
-        td[2].textContent = type
+        /** Берем значения аттрибутов и подставляем их> */
+        let color= this.getAttribute('color')
+        let rect = td[0].getElementsByTagName('rect')[0]
+        rect.setAttribute('fill',color)
+
+        td[1].textContent = this.getAttribute('name')
+        td[2].textContent = this.getAttribute('type')
         td[3].textContent = color.toUpperCase()
 
         table.appendChild(clone)
@@ -25,20 +26,30 @@ customElements.define('custom-tr', CustomTr);
 const save = ()=>{
     /** Сохранение массива объектов в localStorage*/
 
-    let tableRows = document.querySelectorAll('#tableBody tr');
+    let tableRows = document.querySelectorAll('custom-tr');
     let colorPalette = [...tableRows].map(row => {
-        let inputs = row.getElementsByTagName('input'); //nodeList
-        /** Возвращаем объект, состоящий из значений инпутов
-         *  ( в одной строке три инпута, и мы знаем их индексы в nodeList) */
         return  {
-            name:inputs.item(0).value,
-            type:inputs.item(1).value,
-            color:inputs.item(2).value,
+            name:row.getAttribute('name'),
+            type:row.getAttribute('type'),
+            color:row.getAttribute('color'),
         };
     })
-    localStorage.setItem('colors',colorPalette);
+    console.log(colorPalette)
+    localStorage.setItem('colors',JSON.stringify(colorPalette));
 }
-
+const load = () => {
+    let rows = JSON.parse(localStorage.getItem('colors'));
+    rows.forEach( ({name,type,color}) =>{
+        insertRow({
+            name,
+            type,
+            color
+        });
+    })
+}
+function deleteRow(){
+    console.log(this)
+}
 const getValues = (row) =>{
     let inputs = row.getElementsByTagName('input'); //nodeList
     /** Возвращаем объект, состоящий из значений инпутов
@@ -87,4 +98,6 @@ modalForm.onsubmit = (e) =>{
         color
     });
 }
-
+window.onload = () => {
+    load();
+}
