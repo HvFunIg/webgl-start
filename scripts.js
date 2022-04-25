@@ -2,24 +2,66 @@ class CustomTr extends HTMLElement {
     /** Кастомный элемент для строки с цветами*/
     constructor() {
         super();
+        let template = document.querySelector('#customTemplate')
+        this.clone = template.content.cloneNode(true);
+        this.td = this.clone.querySelectorAll("td");
+
+       /* this.addEventListener("click", this.__cl.bind(this));
+        this.addEventListener("mousedown", this.__dragStart.bind(this));
+        this.addEventListener("dragend", this.__dragEnd.bind(this));
+        this.addEventListener("drop", this.__dragEnd.bind(this));
+        this.addEventListener("dragover", this.__dragOver.bind(this));
+        this.addEventListener("dragleave", this.__dragLeave.bind(this));
+   */ }
+    __dragStart(e) {
+       /* console.log("Dragstart:")
+        console.log(e.target)
+        e.target.classList.add(`rowSelected`);*/
+    }
+    __cl(e){
+        console.log(e)
+
+    }
+    __dragEnd() {
+        console.log(1)
+
+        this.removeAttribute("over");
+        this.removeAttribute("dragging");
+    }
+
+    __dragOver() {
+        console.log(1)
+
+        if (this.hasAttribute("dragging")) {
+            this.removeAttribute("over");
+        } else {
+            this.setAttribute("over", "");
+        }
+    }
+
+    __dragLeave() {
+        console.log(1)
+
+        this.removeAttribute("over");
     }
     connectedCallback() {
-        let table = document.querySelector('#tableBody');
-        let template = document.querySelector('#customTemplate')
-        let clone = template.content.cloneNode(true);
-        let td = clone.querySelectorAll("td");
+        console.log(`Color ${this.getAttribute('name')} added`)
 
         /** Берем значения аттрибутов и подставляем их> */
         let color= this.getAttribute('color')
-        let rect = td[0].getElementsByTagName('rect')[0]
+
+        let rect = this.td[0].getElementsByTagName('rect')[0]
         rect.setAttribute('fill',color)
-
-        td[1].textContent = this.getAttribute('name')
-        td[2].textContent = this.getAttribute('type')
-        td[3].textContent = color.toUpperCase()
-
-        table.appendChild(clone)
+        this.setAttribute("draggable", "true");
+        this.td[1].textContent = this.getAttribute('name') || "Name"
+        this.td[2].textContent = this.getAttribute('type') || "Error"
+        this.td[3].textContent = color ? color.toUpperCase() : "#000000"
+        this.td[5].firstElementChild.addEventListener('click',(e)=>{
+            deleteRow(e);
+        })
+        this.appendChild(this.clone)
     }
+
 }
 customElements.define('custom-tr', CustomTr);
 
@@ -34,7 +76,7 @@ const save = ()=>{
             color:row.getAttribute('color'),
         };
     })
-    console.log(colorPalette)
+
     localStorage.setItem('colors',JSON.stringify(colorPalette));
 }
 const load = () => {
@@ -47,8 +89,17 @@ const load = () => {
         });
     })
 }
-function deleteRow(){
-    console.log(this)
+const cancelChanges = () =>{
+    let table = document.querySelector('#tableBody');
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+    load();
+}
+const deleteRow = (e) => {
+    let node = e.target.closest("custom-tr");
+
+    node.remove()
 }
 const getValues = (row) =>{
     let inputs = row.getElementsByTagName('input'); //nodeList
@@ -60,14 +111,7 @@ const getValues = (row) =>{
         color:inputs.item(7).value,
     };
 }
-/***** Modal *****/
 
-const addColor = (e) =>{
-    e.preventDefault()
-}
-const onClose = () =>{
-
-}
 const insertRow = ({color,name,type})=> {
     /** Добавление кастомного элемента в DOM */
 
@@ -98,6 +142,15 @@ modalForm.onsubmit = (e) =>{
         color
     });
 }
+
 window.onload = () => {
     load();
+}
+/***** Modal *****/
+
+const addColor = (e) =>{
+    e.preventDefault()
+}
+const onClose = () =>{
+
 }

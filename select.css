@@ -18,7 +18,11 @@
     position: absolute;
     display: block;
     top: 0;
+    width: 100%;
+    content: '';
     padding-left: 10px;
+    z-index: -1;
+    color: transparent;
 }
 
 .select{
@@ -54,7 +58,10 @@
     color: transparent;
     z-index: 2;
 }
+.select input[name="list"]:checked:before {
+    content: "";
 
+}
 #select:disabled ~ .items #text{
     background: #424242;
 }
@@ -93,7 +100,6 @@
 
 #select:checked ~ .items{
     /*30 - это высота input */
-    padding-top: 30px;
 }
 
 #select:checked ~ .items label{

@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="select.css">
 </head>
 <body>
-    <template id="customTemplate">
-        <tr>
+    <template id="customTemplate" >
+        <tr draggable="true" class="row">
             <td class="td-icon" >
                 <svg width="41" height="41">
                 <rect name="rect" x="0" y="0" width="41" height="41" />
@@ -23,7 +23,7 @@
                 </svg>
             </td>
             <td class="td-icon">
-                <svg onclick="deleteRow()" class="button-edit--base button-edit--bin"width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg   name="delRow" class="button-edit--base button-edit--bin"width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M11 1H0L1.26923 13H9.73077L11 1ZM9.88865 2H1.11135L2.16904 12H8.83096L9.88865 2Z" />
                     <rect width="11" height="2" />
                 </svg>
@@ -48,7 +48,7 @@
                 <p>Выберите тип</p>
                 <label for="select" class="select">
                     <input class="modal-select--input" type="radio" name="list" value="not_changed" id="bg" checked />
-                    <input class="modal-select--input" type="radio" name="list" value="not_changed" id="select">
+                    <input class="modal-select--input" type="radio" name="list" value="main" id="select">
                     <label class="bg" for="bg"></label>
                     <div class="items">
                         <input class="modal-select--input" type="radio" name="list" value="main" id="list[0]" checked>
@@ -59,7 +59,7 @@
                         <label for="list[2]">Secondary</label>
                         <input class="modal-select--input" type="radio" name="list" value="base" id="list[3]">
                         <label for="list[3]">Base</label>
-                        <span id="text">Select something...</span>
+                        <span id="text">.</span>
                     </div>
                 </label>
             </div>
@@ -77,7 +77,7 @@
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M19 9.49323V19H6V6H15.1985L19 9.49323ZM15.5882 5L20 9.05405V20H5V5H15.5882Z"  />
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M16 15H9V19H16V15ZM8 14V20H17V14H8Z" />
                 </svg>
-                <svg onclick="load()" class="button-edit--base button-edit--close" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg onclick="cancelChanges()" class="button-edit--base button-edit--close" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect width="1.06064" height="11.6671" transform="matrix(0.707115 0.707099 -0.707115 0.707099 16.25 8)" />
                     <rect width="1.06064" height="11.6671" transform="matrix(-0.707114 0.707099 -0.707114 -0.707099 16.9999 16.25)" />
                 </svg>
@@ -97,7 +97,6 @@
                 </tr>
                 </thead>
                 <tbody id="tableBody">
-                <custom-tr name="Мята" type="Main" color="#111111"  ></custom-tr>
                 </tbody>
             </table>
         </div>
@@ -106,5 +105,6 @@
     </section>
 
 <script src="scripts.js"></script>
+<script src="dragNdrop.js"></script>
 </body>
 </html>

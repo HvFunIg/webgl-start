@@ -37,6 +37,8 @@ tr{
     justify-content: center;
     align-items: center;
     height: 4.5em;
+    background-color: #424242;
+
 }
 th{
     height: 100%;
@@ -68,7 +70,6 @@ th,td{
     flex: 1;
     min-width: 4.5rem;
 
-    background-color: #424242;
     border: 1px solid #333333;
     padding: 0 0.8rem;
 }
@@ -170,7 +171,9 @@ th,td{
     border: none;
 }
 
-
+.rowSelected{
+    background: #49f54b;
+}
 
 @media screen and (max-width: 1024px) {
 
