@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>TestTask</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="select.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/select.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+            integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+            crossorigin="anonymous" defer>
+    </script>
 </head>
 <body>
     <template id="customTemplate" >
-        <tr draggable="true" class="row">
+        <tr  class="row" draggable="true">
             <td class="td-icon" >
                 <svg width="41" height="41">
                 <rect name="rect" x="0" y="0" width="41" height="41" />
@@ -31,43 +35,62 @@
         </tr>
     </template>
 
-    <section id="modal" class="modal">
-        <h2>Добавление цвета</h2>
-        <form id="modalForm" class="modal-form">
-                <label for="modalName"> Название цвета
-                <input class="modal-input"
-                       name="name"
-                       id = "modalName"
-                       type="text"
-                       placeholder="Введите название"
-                       required
-                >
-                </label>
+    <template id="modalTemplate">
+        <div class="modal-wrapper">
+            <section id="modal" class="modal">
+                <h2>Добавление цвета</h2>
+                <form id="modalForm" class="modal-form">
+                    <label for="modalName" class="modal-row--wrapper" >
+                        <p class="modal-row--p"> Название цвета</p>
+                        <input class="modal-input"
+                               name="name"
+                               id = "modalName"
+                               type="text"
+                               placeholder="Введите название"
+                               required
+                        >
+                    </label>
 
-            <div class="modal-select--wrapper">
-                <p>Выберите тип</p>
-                <label for="select" class="select">
-                    <input class="modal-select--input" type="radio" name="list" value="not_changed" id="bg" checked />
-                    <input class="modal-select--input" type="radio" name="list" value="main" id="select">
-                    <label class="bg" for="bg"></label>
-                    <div class="items">
-                        <input class="modal-select--input" type="radio" name="list" value="main" id="list[0]" checked>
-                        <label for="list[0]">Main</label>
-                        <input class="modal-select--input" type="radio" name="list" value="primary" id="list[1]">
-                        <label for="list[1]">Primary</label>
-                        <input class="modal-select--input" type="radio" name="list" value="secondary" id="list[2]">
-                        <label for="list[2]">Secondary</label>
-                        <input class="modal-select--input" type="radio" name="list" value="base" id="list[3]">
-                        <label for="list[3]">Base</label>
-                        <span id="text">.</span>
+                    <div class="modal-row--wrapper">
+                        <p class="modal-row--p">Выберите тип</p>
+                        <label for="select" class="select">
+                            <input class="modal-select--input" type="radio" name="list" value="main" id="bg"  />
+                            <input class="modal-select--input" type="radio" name="list" value="main" id="select" checked>
+                            <label class="bg" for="bg"></label>
+                            <div class="select-items">
+                                <input class="modal-input modal-select--input" type="radio" name="list" value="main" id="list[0]" checked>
+                                <label for="list[0]">Main</label>
+                                <input class="modal-select--input" type="radio" name="list" value="primary" id="list[1]">
+                                <label for="list[1]">Primary</label>
+                                <input class="modal-select--input" type="radio" name="list" value="secondary" id="list[2]">
+                                <label for="list[2]">Secondary</label>
+                                <input class="modal-select--input" type="radio" name="list" value="base" id="list[3]">
+                                <label for="list[3]">Base</label>
+                                <span id="text" >Main</span>
+                            </div>
+                        </label>
                     </div>
-                </label>
-            </div>
-                <input type="color" class="modal-input--color">
-        <input type="submit" class="form-element button-add button-add--active" value="Добавить">
-        </form>
-    </section>
+                    <div class="modal-row--wrapper">
+                        <input type="color" class="modal-input--color" >
+                    </div>
+                    <input type="submit" class="form-element button-add button-add--active" value="Добавить">
+                </form>
+            </section>
+        </div>
 
+
+    </template>
+
+    <template id="canvasTemplate">
+        <section class="section-canvas">
+            <div class="section-header">
+                <h2>Окно 3Д</h2>
+            </div>
+            <canvas id="glcanvas" >
+                Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+            </canvas>
+        </section>
+    </template>
 
     <section class="colorSection">
         <div class="section-header">
@@ -101,10 +124,26 @@
             </table>
         </div>
         <button class="form-element button-add button-add--inactive"
-                onclick="addColor()"> Добавить цвет</button>
+                onclick="openModal()"> Добавить цвет</button>
     </section>
 
-<script src="scripts.js"></script>
-<script src="dragNdrop.js"></script>
+    <custom-canvas />
+    <section class="section-canvas">
+        <div class="section-header">
+            <h2>Окно 3Д</h2>
+        </div>
+        <canvas id="glcanvas2" >
+            Your browser doesn't appear to support the HTML5 <code>&lt;canvas&gt;</code> element.
+        </canvas>
+    </section>
+
+<custom-modal  ></custom-modal>
+<script src="./js/mainScripts.js"></script>
+<script src="js/dragNdrop.js"></script>
+<script src="js/custom-modal.js"></script>
+<script src="js/custom-tr.js"></script>
+<script src="js/custom-canvas.js" defer></script>
+
+
 </body>
 </html>

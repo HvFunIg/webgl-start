@@ -1,29 +1,18 @@
 const tableDrag = document.querySelector('#tableBody');
-/*const taskElements = tableDrag.getElementsByTagName(`custom-tr`);
-for (const task of taskElements) {
-    task.draggable = true;
 
-}
-*/
+
 tableDrag.addEventListener(`dragstart`, (e) => {
-
-    console.log("Dragstart:")
-    console.log(e.target.closest('custom-tr'))
+    /** Ставим класс при начале переноса*/
     e.target.classList.add(`rowSelected`);
-   // e.target.closest('custom-tr').classList.add(`rowSelected`);
 });
 
 tableDrag.addEventListener(`dragend`, (e) => {
-    console.log("Dragend:")
-
+    /** Убираем класс при окончании переноса*/
     e.target.classList.remove(`rowSelected`);
 });
-tableDrag.addEventListener(`onmousedown`, (e) => {
-    console.log("mousedown:")
 
-    console.log(e.target)
-});
 const getNextElement = (cursorPosition, currentElement) => {
+    /** Выбираем следующий элемент в зависимости от того, перешел ли курсор за центр */
     const currentElementCoord = currentElement.getBoundingClientRect();
     const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
 
@@ -35,10 +24,10 @@ const getNextElement = (cursorPosition, currentElement) => {
 
 tableDrag.addEventListener(`dragover`, (e) => {
     e.preventDefault();
+    /** Передвигаем строку */
 
     const activeElement = tableDrag.querySelector(`.rowSelected`);
-    let currentElement = e.target.closest("custom-tr")
-
+    let currentElement = e.target.closest("tr")
     const isMoveable = activeElement !== currentElement
     if (!isMoveable) {
         return;
@@ -49,9 +38,9 @@ tableDrag.addEventListener(`dragover`, (e) => {
         nextElement &&
         activeElement === nextElement.previousElementSibling ||
         activeElement === nextElement
-    ) {
+    )
         return;
-    }
+
 
     tableDrag.insertBefore(activeElement, nextElement);
 });
